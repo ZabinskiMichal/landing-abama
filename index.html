@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abama Resort Tenerife - Exclusive Open Day Experience</title>
+    
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome Icons via CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: #fafaf8;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .accent-gold {
+            color: #d4af37;
+        }
+        
+        .bg-accent-gold {
+            background-color: #d4af37;
+        }
+        
+        .btn-luxury {
+            background-color: #d4af37;
+            color: #1a1a1a;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid #d4af37;
+        }
+        
+        .btn-luxury:hover {
+            background-color: transparent;
+            color: #d4af37;
+            border-color: #d4af37;
+        }
+        
+        .hero-section {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f5f1ed 0%, #ede7e1 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .video-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('images/bck2.png') center/cover;
+            opacity: 1;
+            z-index: 0;
+        }
+        
+        .video-section-placeholder {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .video-section-placeholder::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: url('https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400&h=400&fit=crop') center/contain no-repeat;
+            opacity: 0.8;
+        }
+        
+        .video-section-placeholder-text {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            color: white;
+        }
+        
+        .video-section-placeholder-text h3 {
+            font-size: 2.25rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .video-section-placeholder-text p {
+            font-size: 1.125rem;
+            opacity: 0.9;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 10;
+        }
+
+        
+        .form-input {
+            background-color: #ffffff;
+            border: 1px solid #e5ddd5;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-input:focus {
+            border-color: #d4af37;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+        }
+        
+        .experience-card {
+            background: white;
+            border: 1px solid #f0ebe5;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .experience-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+        }
+        
+        .divider {
+            background: linear-gradient(90deg, transparent, #d4af37, transparent);
+            height: 2px;
+        }
+        
+        .text-sand {
+            color: #a89968;
+        }
+        
+        .text-dark-gray {
+            color: #2a2a2a;
+        }
+        
+        .loading {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .loading.show {
+            display: flex;
+        }
+    </style>
+</head>
+<body class="bg-white">
+    
+    <!-- Loading Spinner -->
+    <div id="loadingSpinner" class="loading">
+        <div class="flex flex-col items-center">
+            <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-accent-gold"></div>
+            <p class="text-white mt-4 text-lg">TODO: Spinner text ...</p>
+        </div>
+    </div>
+    
+    <!-- Hero Section -->
+    <section class="hero-section flex items-center justify-center">
+        <div class="video-placeholder"></div>
+        <div class="hero-content text-center px-4 sm:px-8">
+            <div class="hero-text-bg">
+                <div class="mb-6 -mt-60">
+                    <h1 class="text-7xl sm:text-8xl font-bold text-white tracking-tight mb-4">
+                        ABAMA OPEN DAY
+                    </h1>
+                </div>
+                
+                <button onclick="document.getElementById('formSection').scrollIntoView({behavior: 'smooth'})" class="btn-luxury px-10 py-4 text-lg rounded-sm hover:shadow-lg font-semibold">
+                    Request Invitation
+                </button>
+            </div>
+            
+            <div class="mt-4 text-center">
+                <p class="text-sand text-sm tracking-widest uppercase">Scroll to explore</p>
+                <div class="text-accent-gold text-2xl mt-2 animate-bounce">
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- The Experience Section -->
+    <section class="py-24 px-4 sm:px-8 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-5xl sm:text-6xl font-bold text-dark-gray mb-4">The Experience</h2>
+                <div class="divider max-w-32 mx-auto mb-8"></div>
+                <p class="text-sand text-lg max-w-2xl mx-auto">Discover the pinnacle of luxury living at Abama</p>
+            </div>
+            
+            <!-- Infinity Pool Section -->
+            <div class="grid md:grid-cols-2 gap-12 items-center mb-20">
+                <div class="aspect-video overflow-hidden rounded-lg">
+                    <img src="images/palmy.jpg" alt="Infinity Pool" class="w-full h-full object-cover">
+                </div>
+                <div>
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-water text-accent-gold text-3xl mr-4"></i>
+                        <h3 class="text-4xl font-bold text-dark-gray">Infinity Pool</h3>
+                    </div>
+                    <p class="text-sand leading-relaxed text-lg">
+                        Immerse yourself in our stunning infinity pool overlooking the Atlantic Ocean, where luxury and nature unite. Experience the perfect blend of relaxation and sophistication as you take in breathtaking views across pristine waters.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Golf Course Section -->
+            <div class="grid md:grid-cols-2 gap-12 items-center mb-20">
+                <div class="order-2 aspect-video overflow-hidden rounded-lg">
+                    <img src="images/plm.jpg" alt="Golf Course" class="w-full h-full object-cover">
+                </div>
+                <div class="order-1">
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-flag text-accent-gold text-3xl mr-4"></i>
+                        <h3 class="text-4xl font-bold text-dark-gray">Golf Course</h3>
+                    </div>
+                    <p class="text-sand leading-relaxed text-lg">
+                        Championship-level golf set against volcanic landscapes, offering an unparalleled golfing experience. Our meticulously maintained course provides both challenge and beauty, combining world-class design with stunning island vistas.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Luxury Interiors Section -->
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="aspect-video overflow-hidden rounded-lg">
+                    <img src="images/dom.jpg" alt="Luxury Interiors" class="w-full h-full object-cover">
+                </div>
+                <div>
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-crown text-accent-gold text-3xl mr-4"></i>
+                        <h3 class="text-4xl font-bold text-dark-gray">Luxury Interiors</h3>
+                    </div>
+                    <p class="text-sand leading-relaxed text-lg">
+                        Meticulously crafted residences with contemporary design, premium materials, and bespoke finishes. Every detail has been carefully considered to create spaces that are both aesthetically stunning and functionally perfect for modern luxury living.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Video Placeholder Section -->
+    <section class="py-12 px-4 sm:px-8 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="video-section-placeholder">
+                <div class="video-section-placeholder-text">
+                    <h3>Sardinian Delights</h3>
+                    <p>Discover our culinary treasures</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Event Details Section -->
+    <section class="py-24 px-4 sm:px-8 bg-gradient-to-br from-slate-50 to-slate-100">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-5xl sm:text-6xl font-bold text-dark-gray mb-4">Event Details</h2>
+                <div class="divider max-w-32 mx-auto"></div>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-12 text-center">
+                <!-- Date -->
+                <div>
+                    <div class="mb-4">
+                        <i class="fas fa-calendar-days text-accent-gold text-5xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-dark-gray mb-2">Date & Time</h3>
+                    <p class="text-sand text-lg leading-relaxed">
+                        Saturday, February 15th, 2026
+                        <br>
+                        <span class="font-light">10:00 AM - 6:00 PM</span>
+                    </p>
+                </div>
+                
+                <!-- Location -->
+                <div>
+                    <div class="mb-4">
+                        <i class="fas fa-location-dot text-accent-gold text-5xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-dark-gray mb-2">Location</h3>
+                    <p class="text-sand text-lg leading-relaxed">
+                        Abama Resort
+                        <br>
+                        <span class="font-light">Costa Adeje, Tenerife, Spain</span>
+                    </p>
+                </div>
+                
+                <!-- What to Expect -->
+                <div>
+                    <div class="mb-4">
+                        <i class="fas fa-sparkles text-accent-gold text-5xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-dark-gray mb-2">What to Expect</h3>
+                    <p class="text-sand text-lg leading-relaxed">
+                        Guided tours, exclusive tastings, and private consultations with our team
+                    </p>
+                </div>
+            </div>
+            
+            <div class="mt-16 p-8 bg-white rounded-lg border border-slate-200">
+                <p class="text-dark-gray text-center text-lg leading-relaxed">
+                    <span class="accent-gold font-semibold">Limited to 30 guests.</span> This is an intimate gathering designed exclusively for our most discerning clientele. Secure your place now.
+                </p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Lead Capture Form Section -->
+    <section id="formSection" class="py-24 px-4 sm:px-8 bg-white">
+        <div class="max-w-2xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-5xl sm:text-6xl font-bold text-dark-gray mb-4">Secure Your Invitation</h2>
+                <div class="divider max-w-32 mx-auto mb-6"></div>
+                <p class="text-sand text-lg">Complete the form below to request your exclusive invitation</p>
+            </div>
+            
+            <form id="attendanceForm" class="space-y-6">
+                <!-- Name Field -->
+                <div>
+                    <label for="name" class="block text-dark-gray font-semibold mb-3 text-sm tracking-wide uppercase">Full Name</label>
+                    <input 
+                        type="text" 
+                        id="name" 
+                        name="name" 
+                        required
+                        class="form-input w-full px-5 py-4 rounded-sm text-dark-gray placeholder-sand"
+                        placeholder="John Doe"
+                    >
+                </div>
+                
+                <!-- Email Field -->
+                <div>
+                    <label for="email" class="block text-dark-gray font-semibold mb-3 text-sm tracking-wide uppercase">Email Address</label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        required
+                        class="form-input w-full px-5 py-4 rounded-sm text-dark-gray placeholder-sand"
+                        placeholder="john@example.com"
+                    >
+                </div>
+                
+                <!-- Phone Number Field with Country Code -->
+                <div class="grid sm:grid-cols-5 gap-4">
+                    <div class="sm:col-span-1">
+                        <label for="countryCode" class="block text-dark-gray font-semibold mb-3 text-sm tracking-wide uppercase">Code</label>
+                        <input 
+                            type="text" 
+                            id="countryCode" 
+                            name="countryCode" 
+                            required
+                            class="form-input w-full px-5 py-4 rounded-sm text-dark-gray placeholder-sand"
+                            placeholder="+34"
+                        >
+                    </div>
+                    <div class="sm:col-span-4">
+                        <label for="phone" class="block text-dark-gray font-semibold mb-3 text-sm tracking-wide uppercase">Phone Number</label>
+                        <input 
+                            type="tel" 
+                            id="phone" 
+                            name="phone" 
+                            required
+                            class="form-input w-full px-5 py-4 rounded-sm text-dark-gray placeholder-sand"
+                            placeholder="123 456 7890"
+                        >
+                    </div>
+                </div>
+                
+                <!-- GDPR Checkbox -->
+                <div class="flex items-start space-x-3 pt-2">
+                    <input 
+                        type="checkbox" 
+                        id="gdpr" 
+                        name="gdpr" 
+                        required
+                        class="mt-1 w-5 h-5 rounded-sm border-sand accent-gold cursor-pointer"
+                    >
+                    <label for="gdpr" class="text-sand text-sm leading-relaxed cursor-pointer">
+                        I agree to the <span class="accent-gold font-semibold">Privacy Policy</span> and consent to receive communications from Abama Resort regarding this event and future offerings.
+                    </label>
+                </div>
+                
+                <!-- Submit Button -->
+                <div class="pt-6">
+                    <button 
+                        type="submit"
+                        class="w-full btn-luxury px-8 py-4 text-lg rounded-sm font-semibold tracking-wide uppercase"
+                    >
+                        Confirm Attendance
+                    </button>
+                </div>
+                
+                <p id="formMessage" class="text-center text-sm text-sand mt-4"></p>
+            </form>
+            
+            <div class="mt-12 pt-8 border-t border-slate-200 text-center">
+                <p class="text-sand text-sm">
+                    <i class="fas fa-shield-alt text-accent-gold mr-2"></i>
+                    Your privacy is protected. We never share your information.
+                </p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="bg-dark-gray text-white py-16 px-4 sm:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-3 gap-8 mb-12 text-center">
+                <!-- Brand -->
+                <div>
+                    <h4 class="text-2xl font-bold mb-4 font-serif">Abama</h4>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Redefining luxury living on the island of eternal spring.
+                    </p>
+                </div>
+                
+                <!-- Legal -->
+                <div>
+                    <h5 class="font-semibold mb-4 text-accent-gold text-sm uppercase tracking-wider">Legal</h5>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="privacy-policy.html" class="hover:text-accent-gold transition">Privacy Policy</a></li>
+                        <li><a href="terms-and-conditions.html" class="hover:text-accent-gold transition">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact Info -->
+                <div>
+                    <h5 class="font-semibold mb-4 text-accent-gold text-sm uppercase tracking-wider">Contact</h5>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="mailto:info@abamaresort.com" class="hover:text-accent-gold transition">info@abamaresort.com</a></li>
+                        <li><a href="tel:+34922960200" class="hover:text-accent-gold transition">+34 922 960 200</a></li>
+                        <li>Costa Adeje, Tenerife</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 pt-8 text-center text-gray-400 text-sm">
+                <p>&copy; 2026 Abama Resort. All rights reserved. | Crafted with excellence</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Form Submission Script -->
+    <script>
+        const form = document.getElementById('attendanceForm');
+        const formMessage = document.getElementById('formMessage');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+        
+        // Replace with your Google Apps Script Web App URL
+        const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/d/YOUR_DEPLOYMENT_ID/userweb?v=1';
+        
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Validate form
+            if (!form.checkValidity()) {
+                formMessage.textContent = '⚠️ Please fill in all required fields correctly.';
+                formMessage.style.color = '#d4af37';
+                return;
+            }
+            
+            // Collect form data
+            const formData = new FormData(form);
+            const data = {
+                name: formData.get('name'),
+                email: formData.get('email'),
+                phone: formData.get('countryCode') + ' ' + formData.get('phone'),
+                gdpr: formData.get('gdpr') ? 'Yes' : 'No',
+                timestamp: new Date().toLocaleString()
+            };
+            
+            // Show loading spinner
+            loadingSpinner.classList.add('show');
+            formMessage.textContent = '';
+            
+            try {
+                const response = await fetch(GOOGLE_APPS_SCRIPT_URL, {
+                    method: 'POST',
+                    body: JSON.stringify(data),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    mode: 'no-cors'
+                });
+                
+                // Hide loading spinner
+                loadingSpinner.classList.remove('show');
+                
+                // Show success message
+                formMessage.textContent = '✓ Thank you! Your invitation request has been submitted. We will contact you shortly.';
+                formMessage.style.color = '#d4af37';
+                formMessage.style.fontWeight = 'bold';
+                
+                // Reset form
+                form.reset();
+                
+                // Scroll to message
+                formMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
+                // Clear message after 6 seconds
+                setTimeout(() => {
+                    formMessage.textContent = '';
+                }, 6000);
+                
+            } catch (error) {
+                // Hide loading spinner
+                loadingSpinner.classList.remove('show');
+                
+                // Show error message
+                formMessage.textContent = '❌ There was an error submitting your request. Please try again or contact us directly.';
+                formMessage.style.color = '#dc2626';
+                console.error('Error:', error);
+            }
+        });
+        
+        // Add smooth scrolling for all anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
