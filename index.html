@@ -356,6 +356,8 @@
                         id="email" 
                         name="email" 
                         required
+                        pattern="^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$"
+                        title="Adres e-mail musi zawierać znak @."
                         class="form-input w-full px-5 py-4 rounded-sm text-dark-gray placeholder-sand"
                         placeholder="jan@example.com"
                     >
@@ -372,6 +374,7 @@
                             required
                             class="form-input w-full px-5 py-4 rounded-sm text-dark-gray placeholder-sand"
                             placeholder="+48"
+                            value="+48"
                         >
                     </div>
                     <div class="sm:col-span-4">
@@ -381,6 +384,9 @@
                             id="phone" 
                             name="phone" 
                             required
+                            inputmode="numeric"
+                            pattern="^[0-9]+$"
+                            title="Numer telefonu może zawierać wyłącznie cyfry."
                             class="form-input w-full px-5 py-4 rounded-sm text-dark-gray placeholder-sand"
                             placeholder="123 456 789"
                         >
