@@ -112,6 +112,19 @@
             color: #2a2a2a;
         }
         
+
+        .faq-details summary {
+            list-style: none;
+        }
+
+        .faq-details summary::marker {
+            content: '';
+        }
+
+        .faq-details summary::-webkit-details-marker {
+            display: none;
+        }
+
         .loading {
             display: none;
             position: fixed;
@@ -443,7 +456,7 @@
             </div>
             
             <div class="space-y-5">
-                <details class="group border-b border-slate-200 pb-4">
+                <details class="faq-details group border-b border-slate-200 pb-4">
                     <summary class="flex cursor-pointer items-center justify-between text-left text-xl font-semibold text-dark-gray hover:text-sand transition-colors">
                         <span class="flex-1">Czy Abama jest częścią sieci Ritz-Carlton?</span>
                         <span class="ml-4 text-accent-gold transition-transform duration-200 group-open:rotate-180" aria-hidden="true">▼</span>
@@ -453,7 +466,7 @@
                     </p>
                 </details>
 
-                <details class="group border-b border-slate-200 pb-4">
+                <details class="faq-details group border-b border-slate-200 pb-4">
                     <summary class="flex cursor-pointer items-center justify-between text-left text-xl font-semibold text-dark-gray hover:text-sand transition-colors">
                         <span class="flex-1">Czym jest Open Day Abama?</span>
                         <span class="ml-4 text-accent-gold transition-transform duration-200 group-open:rotate-180" aria-hidden="true">▼</span>
@@ -463,7 +476,7 @@
                     </p>
                 </details>
 
-                <details class="group border-b border-slate-200 pb-4">
+                <details class="faq-details group border-b border-slate-200 pb-4">
                     <summary class="flex cursor-pointer items-center justify-between text-left text-xl font-semibold text-dark-gray hover:text-sand transition-colors">
                         <span class="flex-1">Dla kogo jest to wydarzenie?</span>
                         <span class="ml-4 text-accent-gold transition-transform duration-200 group-open:rotate-180" aria-hidden="true">▼</span>
@@ -473,7 +486,7 @@
                     </p>
                 </details>
 
-                <details class="group border-b border-slate-200 pb-4">
+                <details class="faq-details group border-b border-slate-200 pb-4">
                     <summary class="flex cursor-pointer items-center justify-between text-left text-xl font-semibold text-dark-gray hover:text-sand transition-colors">
                         <span class="flex-1">Jaki jest dress code?</span>
                         <span class="ml-4 text-accent-gold transition-transform duration-200 group-open:rotate-180" aria-hidden="true">▼</span>
@@ -483,7 +496,7 @@
                     </p>
                 </details>
 
-                <details class="group border-b border-slate-200 pb-4">
+                <details class="faq-details group border-b border-slate-200 pb-4">
                     <summary class="flex cursor-pointer items-center justify-between text-left text-xl font-semibold text-dark-gray hover:text-sand transition-colors">
                         <span class="flex-1">Czy to spotkanie sprzedażowe?</span>
                         <span class="ml-4 text-accent-gold transition-transform duration-200 group-open:rotate-180" aria-hidden="true">▼</span>
@@ -493,7 +506,7 @@
                     </p>
                 </details>
 
-                <details class="group border-b border-slate-200 pb-4">
+                <details class="faq-details group border-b border-slate-200 pb-4">
                     <summary class="flex cursor-pointer items-center justify-between text-left text-xl font-semibold text-dark-gray hover:text-sand transition-colors">
                         <span class="flex-1">Ile osób bierze udział?</span>
                         <span class="ml-4 text-accent-gold transition-transform duration-200 group-open:rotate-180" aria-hidden="true">▼</span>
@@ -503,7 +516,7 @@
                     </p>
                 </details>
 
-                <details class="group border-b border-slate-200 pb-4">
+                <details class="faq-details group border-b border-slate-200 pb-4">
                     <summary class="flex cursor-pointer items-center justify-between text-left text-xl font-semibold text-dark-gray hover:text-sand transition-colors">
                         <span class="flex-1">Czy apartamenty są gotowe?</span>
                         <span class="ml-4 text-accent-gold transition-transform duration-200 group-open:rotate-180" aria-hidden="true">▼</span>
@@ -513,7 +526,7 @@
                     </p>
                 </details>
 
-                <details class="group border-b border-slate-200 pb-4">
+                <details class="faq-details group border-b border-slate-200 pb-4">
                     <summary class="flex cursor-pointer items-center justify-between text-left text-xl font-semibold text-dark-gray hover:text-sand transition-colors">
                         <span class="flex-1">W jakiej cenie są apartamenty?</span>
                         <span class="ml-4 text-accent-gold transition-transform duration-200 group-open:rotate-180" aria-hidden="true">▼</span>
@@ -523,7 +536,7 @@
                     </p>
                 </details>
 
-                <details class="group border-b border-slate-200 pb-4">
+                <details class="faq-details group border-b border-slate-200 pb-4">
                     <summary class="flex cursor-pointer items-center justify-between text-left text-xl font-semibold text-dark-gray hover:text-sand transition-colors">
                         <span class="flex-1">Czy jest gwarancja zwrotu?</span>
                         <span class="ml-4 text-accent-gold transition-transform duration-200 group-open:rotate-180" aria-hidden="true">▼</span>
@@ -533,7 +546,7 @@
                     </p>
                 </details>
 
-                <details class="group border-b border-slate-200 pb-4">
+                <details class="faq-details group border-b border-slate-200 pb-4">
                     <summary class="flex cursor-pointer items-center justify-between text-left text-xl font-semibold text-dark-gray hover:text-sand transition-colors">
                         <span class="flex-1">Jak wygląda zapis?</span>
                         <span class="ml-4 text-accent-gold transition-transform duration-200 group-open:rotate-180" aria-hidden="true">▼</span>
@@ -543,7 +556,7 @@
                     </p>
                 </details>
 
-                <details class="group border-b border-slate-200 pb-4">
+                <details class="faq-details group border-b border-slate-200 pb-4">
                     <summary class="flex cursor-pointer items-center justify-between text-left text-xl font-semibold text-dark-gray hover:text-sand transition-colors">
                         <span class="flex-1">Czy mogę przyjść z osobą towarzyszącą?</span>
                         <span class="ml-4 text-accent-gold transition-transform duration-200 group-open:rotate-180" aria-hidden="true">▼</span>
@@ -553,7 +566,7 @@
                     </p>
                 </details>
 
-                <details class="group border-b border-slate-200 pb-4">
+                <details class="faq-details group border-b border-slate-200 pb-4">
                     <summary class="flex cursor-pointer items-center justify-between text-left text-xl font-semibold text-dark-gray hover:text-sand transition-colors">
                         <span class="flex-1">W jakim języku odbywa się wydarzenie?</span>
                         <span class="ml-4 text-accent-gold transition-transform duration-200 group-open:rotate-180" aria-hidden="true">▼</span>
@@ -563,7 +576,7 @@
                     </p>
                 </details>
 
-                <details class="group border-b border-slate-200 pb-4">
+                <details class="faq-details group border-b border-slate-200 pb-4">
                     <summary class="flex cursor-pointer items-center justify-between text-left text-xl font-semibold text-dark-gray hover:text-sand transition-colors">
                         <span class="flex-1">Czy to jednorazowe wydarzenie?</span>
                         <span class="ml-4 text-accent-gold transition-transform duration-200 group-open:rotate-180" aria-hidden="true">▼</span>
