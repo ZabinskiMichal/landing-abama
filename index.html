@@ -603,19 +603,8 @@
         const formMessage = document.getElementById('formMessage');
         const loadingSpinner = document.getElementById('loadingSpinner');
         
-        const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw2iedZyuPBehNoq5qYMvaQbNGoOl7zU3HjIlTbZoSovEluNv2ComTaHsoQQD2h5yYZ/exec';
+        const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwwDyhZJdBpjr3LknJtmShQNOnYqU-22KqLu0W0NiEhX19hXUXr38wbIqstCF6lgGFU/exec';
 
-        const getUtmParams = () => {
-            const params = new URLSearchParams(window.location.search);
-            return {
-                utm_source: params.get('utm_source') || '',
-                utm_medium: params.get('utm_medium') || '',
-                utm_campaign: params.get('utm_campaign') || '',
-                utm_content: params.get('utm_content') || '',
-                utm_term: params.get('utm_term') || ''
-            };
-        };
-        
         form.addEventListener('submit', async function(e) {
             e.preventDefault();
             
@@ -635,8 +624,7 @@
                 company: '',
                 message: '',
                 gdpr: formData.get('gdpr') ? 'Yes' : 'No',
-                website: formData.get('website') || '',
-                ...getUtmParams()
+                website: formData.get('website') || ''
             };
             
             // Show loading spinner
