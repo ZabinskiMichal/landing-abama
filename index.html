@@ -374,8 +374,8 @@
                         id="email" 
                         name="email" 
                         required
-                        pattern="^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$"
-                        title="Adres e-mail musi zawierać znak @."
+                        pattern="^[^@\\s]+@[^@\\s]+$"
+                        title="Adres e-mail musi zawierać znak @"
                         data-i18n-title="formEmailTitle"
                         class="form-input w-full px-5 py-4 rounded-sm text-dark-gray placeholder-sand"
                         placeholder="jan@example.com"
@@ -383,36 +383,22 @@
                     >
                 </div>
                 
-                <!-- Phone Number Field with Country Code -->
-                <div class="grid sm:grid-cols-5 gap-4">
-                    <div class="sm:col-span-1">
-                        <label for="countryCode" class="block text-dark-gray font-semibold mb-3 text-sm tracking-wide uppercase" data-i18n="formCountryCodeLabel">Kod</label>
-                        <input 
-                            type="text" 
-                            id="countryCode" 
-                            name="countryCode" 
-                            required
-                            class="form-input w-full px-5 py-4 rounded-sm text-dark-gray placeholder-sand"
-                            placeholder="+48"
-                            value="+48"
-                        >
-                    </div>
-                    <div class="sm:col-span-4">
-                        <label for="phone" class="block text-dark-gray font-semibold mb-3 text-sm tracking-wide uppercase" data-i18n="formPhoneLabel">Numer telefonu</label>
-                        <input 
-                            type="tel" 
-                            id="phone" 
-                            name="phone" 
-                            required
-                            inputmode="numeric"
-                            pattern="^[0-9]+$"
-                            title="Numer telefonu może zawierać wyłącznie cyfry."
-                            data-i18n-title="formPhoneTitle"
-                            class="form-input w-full px-5 py-4 rounded-sm text-dark-gray placeholder-sand"
-                            placeholder="123 456 789"
-                            data-i18n-placeholder="formPhonePlaceholder"
-                        >
-                    </div>
+                <!-- Phone Number Field -->
+                <div>
+                    <label for="phone" class="block text-dark-gray font-semibold mb-3 text-sm tracking-wide uppercase" data-i18n="formPhoneLabel">Numer telefonu</label>
+                    <input 
+                        type="tel" 
+                        id="phone" 
+                        name="phone" 
+                        required
+                        inputmode="numeric"
+                        pattern="^\\+?[0-9 ]+$"
+                        title="Numer telefonu może zawierać cyfry, spacje oraz opcjonalny znak +."
+                        data-i18n-title="formPhoneTitle"
+                        class="form-input w-full px-5 py-4 rounded-sm text-dark-gray placeholder-sand"
+                        placeholder="+48 123 456 789"
+                        data-i18n-placeholder="formPhonePlaceholder"
+                    >
                 </div>
                 
                 <!-- GDPR Checkbox -->
@@ -673,8 +659,8 @@
                 formEmailPlaceholder: 'john@example.com',
                 formCountryCodeLabel: 'Code',
                 formPhoneLabel: 'Phone number',
-                formPhoneTitle: 'Phone number can contain digits only.',
-                formPhonePlaceholder: '123 456 789',
+                formPhoneTitle: 'Phone number can include digits, spaces, and an optional + sign.',
+                formPhonePlaceholder: '+48 123 456 789',
                 formGdprLabel: 'I consent to the <span class="accent-gold font-semibold">Privacy Policy</span> and to receiving communications from Abama Resort about this event and future offers.',
                 formHoneypotLabel: 'Website',
                 formSubmit: 'Confirm attendance',
