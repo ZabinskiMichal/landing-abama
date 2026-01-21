@@ -129,6 +129,15 @@
         .loading.show {
             display: flex;
         }
+
+        .honeypot-field {
+            position: absolute;
+            left: -10000px;
+            top: auto;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+        }
     </style>
 </head>
 <body class="bg-white">
@@ -327,6 +336,10 @@
             </div>
             
             <form id="attendanceForm" class="space-y-6">
+                <div class="honeypot-field" aria-hidden="true">
+                    <label for="website">Website</label>
+                    <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+                </div>
                 <!-- Name Field -->
                 <div>
                     <label for="name" class="block text-dark-gray font-semibold mb-3 text-sm tracking-wide uppercase">Imię i nazwisko</label>
@@ -384,8 +397,7 @@
                     <input 
                         type="checkbox" 
                         id="gdpr" 
-                        name="gdpr" 
-                        required
+                        name="consent" 
                         class="mt-1 w-5 h-5 rounded-sm border-sand accent-gold cursor-pointer"
                     >
                     <label for="gdpr" class="text-sand text-sm leading-relaxed cursor-pointer">
@@ -590,32 +602,56 @@
         const loadingSpinner = document.getElementById('loadingSpinner');
         
         // Replace with your Google Apps Script Web App URL
-        const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/d/YOUR_DEPLOYMENT_ID/userweb?v=1';
-        
+        const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw2iedZyuPBehNoq5qYMvaQbNGoOl7zU3HjIlTbZoSovEluNv2ComTaHsoQQD2h5yYZ/exec';
+
+        const getUtmParams = () => {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                utm_source: params.get('utm_source') || '',
+                utm_medium: params.get('utm_medium') || '',
+                utm_campaign: params.get('utm_campaign') || '',
+                utm_content: params.get('utm_content') || '',
+                utm_term: params.get('utm_term') || ''
+            };
+        };
+
+        const setFormMessage = (message, color) => {
+            formMessage.textContent = message;
+            formMessage.style.color = color;
+            formMessage.style.fontWeight = 'bold';
+        };
+
         form.addEventListener('submit', async function(e) {
             e.preventDefault();
-            
+
             // Validate form
             if (!form.checkValidity()) {
-                formMessage.textContent = '⚠️ Proszę poprawnie wypełnić wszystkie wymagane pola.';
-                formMessage.style.color = '#d4af37';
+                setFormMessage('⚠️ Proszę poprawnie wypełnić wszystkie wymagane pola.', '#d4af37');
                 return;
             }
-            
+
             // Collect form data
             const formData = new FormData(form);
+            const phone = [
+                formData.get('countryCode'),
+                formData.get('phone')
+            ].filter(Boolean).join(' ').trim();
+
             const data = {
                 name: formData.get('name'),
                 email: formData.get('email'),
-                phone: formData.get('countryCode') + ' ' + formData.get('phone'),
-                gdpr: formData.get('gdpr') ? 'Tak' : 'Nie',
-                timestamp: new Date().toLocaleString()
+                phone: phone || '',
+                company: formData.get('company') || '',
+                message: formData.get('message') || '',
+                consent: Boolean(formData.get('consent')),
+                website: formData.get('website') || '',
+                ...getUtmParams()
             };
-            
+
             // Show loading spinner
             loadingSpinner.classList.add('show');
-            formMessage.textContent = '';
-            
+            setFormMessage('⏳ Wysyłamy zgłoszenie...', '#d4af37');
+
             try {
                 const response = await fetch(GOOGLE_APPS_SCRIPT_URL, {
                     method: 'POST',
@@ -623,35 +659,36 @@
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    mode: 'no-cors'
+                    mode: 'cors'
                 });
-                
+
+                const result = await response.json();
+                if (!response.ok || !result.ok) {
+                    throw new Error(result.error || 'Błąd wysyłki.');
+                }
+
                 // Hide loading spinner
                 loadingSpinner.classList.remove('show');
-                
+
                 // Show success message
-                formMessage.textContent = '✓ Dziękujemy! Twoje zgłoszenie zostało wysłane. Wkrótce się z Tobą skontaktujemy.';
-                formMessage.style.color = '#d4af37';
-                formMessage.style.fontWeight = 'bold';
-                
+                setFormMessage('✓ Dziękujemy! Twoje zgłoszenie zostało wysłane. Wkrótce się z Tobą skontaktujemy.', '#d4af37');
+
                 // Reset form
                 form.reset();
-                
+
                 // Scroll to message
                 formMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                
+
                 // Clear message after 6 seconds
                 setTimeout(() => {
                     formMessage.textContent = '';
                 }, 6000);
-                
             } catch (error) {
                 // Hide loading spinner
                 loadingSpinner.classList.remove('show');
-                
+
                 // Show error message
-                formMessage.textContent = '❌ Wystąpił błąd podczas wysyłania zgłoszenia. Spróbuj ponownie lub skontaktuj się z nami bezpośrednio.';
-                formMessage.style.color = '#dc2626';
+                setFormMessage('❌ Wystąpił błąd podczas wysyłania zgłoszenia. Spróbuj ponownie lub skontaktuj się z nami bezpośrednio.', '#dc2626');
                 console.error('Error:', error);
             }
         });
