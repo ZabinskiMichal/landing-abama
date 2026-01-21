@@ -392,8 +392,8 @@
                         name="phone" 
                         required
                         inputmode="numeric"
-                        pattern="^\\+?[0-9 ]+$"
-                        title="Numer telefonu może zawierać cyfry, spacje oraz opcjonalny znak +."
+                        pattern="^(?=(?:.*[0-9]){9,})[+]?[0-9 ]+$"
+                        title="Numer telefonu może zawierać cyfry, spacje oraz opcjonalny znak + (min. 9 cyfr)."
                         data-i18n-title="formPhoneTitle"
                         class="form-input w-full px-5 py-4 rounded-sm text-dark-gray placeholder-sand"
                         placeholder="+48 123 456 789"
@@ -659,7 +659,7 @@
                 formEmailPlaceholder: 'john@example.com',
                 formCountryCodeLabel: 'Code',
                 formPhoneLabel: 'Phone number',
-                formPhoneTitle: 'Phone number can include digits, spaces, and an optional + sign.',
+                formPhoneTitle: 'Phone number can include digits, spaces, and an optional + sign (min. 9 digits).',
                 formPhonePlaceholder: '+48 123 456 789',
                 formGdprLabel: 'I consent to the <span class="accent-gold font-semibold">Privacy Policy</span> and to receiving communications from Abama Resort about this event and future offers.',
                 formHoneypotLabel: 'Website',
