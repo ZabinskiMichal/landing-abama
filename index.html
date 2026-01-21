@@ -858,7 +858,7 @@
             const enableSound = () => {
                 if (sardynskieVideo.muted) {
                     sardynskieVideo.muted = false;
-                    sardynskieVideo.volume = 1;
+                    sardynskieVideo.volume = 0.5;
                     sardynskieVideo.play().catch(() => {
                         // Playback with sound may still be blocked.
                     });
