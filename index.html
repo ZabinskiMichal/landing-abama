@@ -129,6 +129,14 @@
         .loading.show {
             display: flex;
         }
+
+        .hidden-field {
+            position: absolute;
+            left: -9999px;
+            width: 1px;
+            height: 1px;
+            opacity: 0;
+        }
     </style>
 </head>
 <body class="bg-white">
@@ -392,6 +400,12 @@
                         Wyrażam zgodę na <span class="accent-gold font-semibold">Politykę prywatności</span> oraz na otrzymywanie komunikacji od Abama Resort dotyczącej tego wydarzenia i przyszłych ofert.
                     </label>
                 </div>
+
+                <!-- Honeypot Field -->
+                <div class="hidden-field" aria-hidden="true">
+                    <label for="website">Strona internetowa</label>
+                    <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+                </div>
                 
                 <!-- Submit Button -->
                 <div class="pt-6">
@@ -589,8 +603,18 @@
         const formMessage = document.getElementById('formMessage');
         const loadingSpinner = document.getElementById('loadingSpinner');
         
-        // Replace with your Google Apps Script Web App URL
-        const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/d/YOUR_DEPLOYMENT_ID/userweb?v=1';
+        const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw2iedZyuPBehNoq5qYMvaQbNGoOl7zU3HjIlTbZoSovEluNv2ComTaHsoQQD2h5yYZ/exec';
+
+        const getUtmParams = () => {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                utm_source: params.get('utm_source') || '',
+                utm_medium: params.get('utm_medium') || '',
+                utm_campaign: params.get('utm_campaign') || '',
+                utm_content: params.get('utm_content') || '',
+                utm_term: params.get('utm_term') || ''
+            };
+        };
         
         form.addEventListener('submit', async function(e) {
             e.preventDefault();
@@ -608,8 +632,11 @@
                 name: formData.get('name'),
                 email: formData.get('email'),
                 phone: formData.get('countryCode') + ' ' + formData.get('phone'),
-                gdpr: formData.get('gdpr') ? 'Tak' : 'Nie',
-                timestamp: new Date().toLocaleString()
+                company: '',
+                message: '',
+                consent: Boolean(formData.get('gdpr')),
+                website: formData.get('website') || '',
+                ...getUtmParams()
             };
             
             // Show loading spinner
@@ -622,24 +649,29 @@
                     body: JSON.stringify(data),
                     headers: {
                         'Content-Type': 'application/json'
-                    },
-                    mode: 'no-cors'
+                    }
                 });
-                
+
+                const responseData = await response.json();
+
                 // Hide loading spinner
                 loadingSpinner.classList.remove('show');
                 
+                if (!response.ok || !responseData.ok) {
+                    throw new Error(responseData.error || 'Submission failed.');
+                }
+
                 // Show success message
                 formMessage.textContent = '✓ Dziękujemy! Twoje zgłoszenie zostało wysłane. Wkrótce się z Tobą skontaktujemy.';
                 formMessage.style.color = '#d4af37';
                 formMessage.style.fontWeight = 'bold';
-                
+
                 // Reset form
                 form.reset();
-                
+
                 // Scroll to message
                 formMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                
+
                 // Clear message after 6 seconds
                 setTimeout(() => {
                     formMessage.textContent = '';
