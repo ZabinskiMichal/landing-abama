@@ -286,7 +286,7 @@
                     </div>
                     <h3 class="text-2xl font-bold text-dark-gray mb-2">Data i godzina</h3>
                     <p class="text-sand text-lg leading-relaxed">
-                        Sobota, 15 lutego 2026
+                        Sobota, 27 lutego 2026
                         <br>
                         <span class="font-light">16:00 - 19:00</span>
                     </p>
@@ -614,14 +614,12 @@
         form.addEventListener('submit', async function(e) {
             e.preventDefault();
             
-            // Validate form
             if (!form.checkValidity()) {
                 formMessage.textContent = '⚠️ Proszę poprawnie wypełnić wszystkie wymagane pola.';
                 formMessage.style.color = '#d4af37';
                 return;
             }
             
-            // Collect form data
             const formData = new FormData(form);
             const data = {
                 name: formData.get('name'),
@@ -633,7 +631,6 @@
                 website: formData.get('website') || ''
             };
             
-            // Show loading spinner
             loadingSpinner.classList.add('show');
             formMessage.textContent = '';
             
@@ -644,21 +641,16 @@
                     body: JSON.stringify(data)
                 });
 
-                // Hide loading spinner
                 loadingSpinner.classList.remove('show');
                 
-                // Show success message
                 formMessage.textContent = '✓ Dziękujemy! Twoje zgłoszenie zostało wysłane. Wkrótce się z Tobą skontaktujemy.';
                 formMessage.style.color = '#d4af37';
                 formMessage.style.fontWeight = 'bold';
 
-                // Reset form
                 form.reset();
 
-                // Scroll to message
                 formMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
-                // Clear message after 6 seconds
                 setTimeout(() => {
                     formMessage.textContent = '';
                 }, 6000);
