@@ -792,10 +792,13 @@
             }
             
             const formData = new FormData(form);
+            const countryCode = (formData.get('countryCode') || '').trim();
+            const phoneNumber = (formData.get('phone') || '').trim();
+            const phone = [countryCode, phoneNumber].filter(Boolean).join(' ');
             const data = {
                 name: formData.get('name'),
                 email: formData.get('email'),
-                phone: formData.get('countryCode') + ' ' + formData.get('phone'),
+                phone,
                 company: '',
                 message: '',
                 gdpr: formData.get('gdpr') ? 'Yes' : 'No',
