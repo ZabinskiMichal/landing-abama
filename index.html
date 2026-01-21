@@ -688,6 +688,23 @@
         // Autoplay video when it enters the viewport
         const sardynskieVideo = document.getElementById('sardynskieVideo');
         if (sardynskieVideo) {
+            const enableSound = () => {
+                if (sardynskieVideo.muted) {
+                    sardynskieVideo.muted = false;
+                    sardynskieVideo.volume = 1;
+                    sardynskieVideo.play().catch(() => {
+                        // Playback with sound may still be blocked.
+                    });
+                }
+                document.removeEventListener('click', enableSound);
+                document.removeEventListener('touchstart', enableSound);
+                document.removeEventListener('keydown', enableSound);
+            };
+
+            document.addEventListener('click', enableSound);
+            document.addEventListener('touchstart', enableSound);
+            document.addEventListener('keydown', enableSound);
+
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
