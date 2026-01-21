@@ -50,11 +50,14 @@ function doPost(e) {
     }
     
     // Add the new submission as a row
+    const rawPhone = String(postData.phone || '').trim();
+    const safePhone = rawPhone && !rawPhone.startsWith("'") ? `'${rawPhone}` : rawPhone;
+
     const newRow = [
       postData.timestamp || new Date().toLocaleString('es-ES', { timeZone: 'Europe/Madrid' }),
       postData.name,
       postData.email,
-      postData.phone,
+      safePhone,
       postData.gdpr || 'No'
     ];
     
