@@ -149,6 +149,57 @@
             height: 1px;
             opacity: 0;
         }
+
+        .success-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 1100;
+            background: rgba(15, 15, 15, 0.6);
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem;
+        }
+
+        .success-modal.show {
+            display: flex;
+        }
+
+        .success-modal-content {
+            background: #ffffff;
+            border-radius: 0.75rem;
+            padding: 2.5rem;
+            max-width: 520px;
+            width: 100%;
+            border: 2px solid rgba(212, 175, 55, 0.35);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            animation: modalPop 0.25s ease-out;
+        }
+
+        .success-modal-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 999px;
+            background: rgba(212, 175, 55, 0.15);
+            color: #d4af37;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.25rem;
+            font-size: 1.75rem;
+        }
+
+        @keyframes modalPop {
+            from {
+                transform: translateY(10px) scale(0.98);
+                opacity: 0.5;
+            }
+            to {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+        }
     </style>
 </head>
 <body class="bg-white">
@@ -165,6 +216,21 @@
         <button id="langToggle" class="btn-luxury px-3 py-1 text-xs uppercase tracking-widest rounded-sm shadow-md">
             EN
         </button>
+    </div>
+
+    <div id="successModal" class="success-modal" role="dialog" aria-modal="true" aria-labelledby="successModalTitle">
+        <div class="success-modal-content">
+            <div class="success-modal-icon">
+                <i class="fas fa-check"></i>
+            </div>
+            <h3 id="successModalTitle" class="text-2xl font-bold text-dark-gray mb-3" data-i18n="successPopupTitle">Rezerwacja potwierdzona</h3>
+            <p id="successModalMessage" class="text-sand text-lg leading-relaxed mb-6" data-i18n="successPopupMessage">
+                ✓ Dziękujemy! Twoje zgłoszenie zostało wysłane. Wkrótce się z Tobą skontaktujemy.
+            </p>
+            <button id="successModalClose" type="button" class="btn-luxury px-8 py-3 text-sm rounded-sm uppercase tracking-wide">
+                <span data-i18n="successPopupCta">Rozumiem</span>
+            </button>
+        </div>
     </div>
     
     <!-- Hero Section -->
@@ -702,7 +768,10 @@
                 footerCopyright: '&copy; 2026 Abama Resort. All rights reserved. | Crafted with excellence',
                 formValidationError: '⚠️ Please correctly fill in all required fields.',
                 formSuccess: '✓ Thank you! Your submission has been sent. We will contact you soon.',
-                formError: '❌ There was an error while sending your request. Please try again or contact us directly.'
+                formError: '❌ There was an error while sending your request. Please try again or contact us directly.',
+                successPopupTitle: 'Reservation confirmed',
+                successPopupMessage: '✓ Thank you! Your submission has been sent. We will contact you soon.',
+                successPopupCta: 'Got it'
             }
         };
 
@@ -777,8 +846,36 @@
         const form = document.getElementById('attendanceForm');
         const formMessage = document.getElementById('formMessage');
         const loadingSpinner = document.getElementById('loadingSpinner');
+        const successModal = document.getElementById('successModal');
+        const successModalMessage = document.getElementById('successModalMessage');
+        const successModalClose = document.getElementById('successModalClose');
         
         const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwwDyhZJdBpjr3LknJtmShQNOnYqU-22KqLu0W0NiEhX19hXUXr38wbIqstCF6lgGFU/exec';
+
+        const closeSuccessModal = () => {
+            successModal.classList.remove('show');
+        };
+
+        const openSuccessModal = () => {
+            successModalMessage.textContent = document.documentElement.lang === 'en'
+                ? translations.en.successPopupMessage
+                : '✓ Dziękujemy! Twoje zgłoszenie zostało wysłane. Wkrótce się z Tobą skontaktujemy.';
+            successModal.classList.add('show');
+        };
+
+        successModalClose.addEventListener('click', closeSuccessModal);
+
+        successModal.addEventListener('click', (event) => {
+            if (event.target === successModal) {
+                closeSuccessModal();
+            }
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && successModal.classList.contains('show')) {
+                closeSuccessModal();
+            }
+        });
 
         form.addEventListener('submit', async function(e) {
             e.preventDefault();
@@ -830,6 +927,11 @@
                 setTimeout(() => {
                     formMessage.textContent = '';
                 }, 6000);
+
+                openSuccessModal();
+                setTimeout(() => {
+                    closeSuccessModal();
+                }, 8000);
                 
             } catch (error) {
                 // Hide loading spinner
